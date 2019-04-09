@@ -1,14 +1,19 @@
 package com.ishdemon.tmdbapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.View;
 
 import com.ishdemon.tmdbapp.databinding.ActivityMainBinding;
 import com.ishdemon.tmdbapp.model.Result;
 import com.ishdemon.tmdbapp.utils.ItemOffsetDecoration;
 import com.ishdemon.tmdbapp.viewmodel.MainViewModel;
+import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 
@@ -17,7 +22,6 @@ import java.util.Observer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +51,23 @@ public class MainActivity extends AppCompatActivity implements Observer {
         observable.addObserver(this);
     }
 
+    private OnClickListener<Result> onClickListener = new OnClickListener<Result>() {
+        @Override
+        public boolean onClick(View v, IAdapter<Result> adapter, Result item, int position) {
+            final Intent i = new Intent(MainActivity.this, DetailsActivity.class);
+            i.putExtra("id", item.getId());
+            i.putExtra("title", item.getTitle());
+            startActivity(i);
+            return false;
+        }
+    };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
 
     private void setupRecyclerview(final RecyclerView recyclerview) {
 
@@ -54,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         mFooterAdapter = new ItemAdapter();
         mMovieAdapter.setHasStableIds(true);
         mMovieAdapter.addAdapter(1, mFooterAdapter);
-        //mMovieAdapter.withOnClickListener(onClickListener);
+        mMovieAdapter.withOnClickListener(onClickListener);
         recyclerview.setAdapter(mMovieAdapter);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
         recyclerview.addItemDecoration(itemDecoration);

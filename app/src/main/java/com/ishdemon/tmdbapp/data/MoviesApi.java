@@ -11,11 +11,11 @@ import retrofit2.http.Query;
 public interface MoviesApi {
 
     @GET("discover/movie")
-    Single<DiscoverResponse>getTopMovies( @Query("api_key") String api_key,
+    Single<DiscoverResponse> getTopMovies(@Query("api_key") String api_key,
                                           @Query("sort_by") String sort,
                                           @Query("page") Integer page);
 
-    @GET("movie")
-    Single<DetailsResponse>getMovieDetails(@Query("api_key") String api_key,
-                                           @Path("movie_id") Integer id);
+    @GET("movie/{id}")
+    Single<DetailsResponse> getMovieDetails(
+            @Path("id") Integer id, @Query("api_key") String api_key);
 }

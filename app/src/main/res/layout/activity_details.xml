@@ -1,106 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <ImageView
-        android:id="@+id/img_backdrop"
+        <variable
+            name="viewModel"
+            type="com.ishdemon.tmdbapp.viewmodel.DetailViewModel" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_overview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/img_backdrop"
-        android:padding="10dp"
-        android:textSize="12sp"
-        tools:text="As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind." />
 
-    <TextView
-        android:id="@+id/tv_runtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_overview"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        tools:text="142 minutes" />
-
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tv_runtime"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/tv_runtime"
-        android:gravity="center_horizontal"
-        tools:text="21st April 2019" />
-
-    <TextView
-        android:id="@+id/tv_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tv_date"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:background="@color/design_default_color_secondary"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="@android:color/white"
-        tools:text="9.2" />
-
-    <TextView
-        android:id="@+id/tv_genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_runtime"
-        android:layout_alignLeft="@+id/tv_runtime"
-        android:layout_marginTop="10dp" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_genre"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        app:cardElevation="2dp">
+        <ImageView
+            android:id="@+id/img_backdrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:pictureUrl="@{viewModel.preview}"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Budget"
-            android:textStyle="normal|bold" />
+            android:layout_below="@+id/img_backdrop"
+            android:padding="10dp"
+            android:text="@{viewModel.mDesc}"
+            tools:text="As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind." />
 
         <TextView
-            android:id="@+id/tv_budget"
+            android:id="@+id/tv_runtime"
+            android:text="@{viewModel.mRuntime}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_below="@+id/tv_overview"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            tools:text="142 minutes" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_date"
+            android:text="@{viewModel.mDate}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="30dp"
-            android:text="Revenue"
-            android:textStyle="bold" />
+            android:layout_alignTop="@+id/tv_runtime"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/tv_runtime"
+            android:gravity="center_horizontal"
+            tools:text="21st April 2019" />
 
         <TextView
-            android:id="@+id/tv_revenue"
+            android:id="@+id/tv_rating"
+            android:text="@{viewModel.mRating}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp" />
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+            android:layout_alignTop="@+id/tv_date"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@color/design_default_color_secondary"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@android:color/white"
+            tools:text="9.2" />
+
+        <TextView
+            android:id="@+id/tv_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_rating"
+            android:layout_alignLeft="@+id/tv_rating"
+            android:layout_alignTop="@+id/tv_genre"
+            android:background="@color/colorAccent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@android:color/white"
+            android:text="@{viewModel.mLang}"
+            android:textSize="12sp"
+            tools:text="EN" />
+
+        <TextView
+            android:id="@+id/tv_genre"
+            android:text="@{viewModel.mGenre}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_runtime"
+            android:layout_alignLeft="@+id/tv_runtime"
+            android:layout_marginTop="10dp" />
+
+        <androidx.cardview.widget.CardView
+            app:contentPadding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_genre"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardElevation="2dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budget"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/tv_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@{viewModel.mBudget}" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="30dp"
+                android:text="Revenue"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_revenue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:text="@{viewModel.mRevenue}" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

@@ -67,6 +67,14 @@ public class Result extends AbstractItem<Result, Result.ViewHolder> {
     @Expose
     private String releaseDate;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     @Override
     public int getType() {
         return R.id.item_parent;
