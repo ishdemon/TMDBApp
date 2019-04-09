@@ -33,7 +33,7 @@ public class MyApp extends MultiDexApplication {
         return MyApp.get(context);
     }
 
-    public static String getPexelAppId(Context c) {
+    public static String getApikey() {
         return BuildConfig.API_KEY;
     }
 

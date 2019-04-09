@@ -99,6 +99,11 @@ public class Result extends AbstractItem<Result, Result.ViewHolder> {
         public void bindView(Result item, List<Object> payloads) {
             String url = "https://image.tmdb.org/t/p/w342";
             GlideApp.with(posterImage.getContext()).load(url + item.posterPath).transition(DrawableTransitionOptions.withCrossFade()).into(posterImage);
+            title.setText(item.title);
+            desc.setText(item.overview);
+            rating.setText(String.valueOf(item.voteAverage));
+            date.setText(item.releaseDate);
+            language.setText(item.originalLanguage.toUpperCase());
         }
 
         @Override
