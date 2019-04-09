@@ -1,5 +1,6 @@
 package com.ishdemon.tmdbapp.model;
 
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,9 +10,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.ishdemon.tmdbapp.GlideApp;
 import com.ishdemon.tmdbapp.R;
+import com.ishdemon.tmdbapp.utils.DateParser;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -102,7 +108,7 @@ public class Result extends AbstractItem<Result, Result.ViewHolder> {
             title.setText(item.title);
             desc.setText(item.overview);
             rating.setText(String.valueOf(item.voteAverage));
-            date.setText(item.releaseDate);
+            date.setText(DateParser.getFormattedDate(item.releaseDate));
             language.setText(item.originalLanguage.toUpperCase());
         }
 
